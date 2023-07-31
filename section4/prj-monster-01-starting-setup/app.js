@@ -8,7 +8,30 @@ const app = Vue.createApp({
             monsterHealth: 100,
             currentRound: 0,
             winner: null,
+            logs: [],
         };
+    },
+
+    watch: {
+        playerHealth(value) {
+            if (value <= 0 && this.monsterHealth <= 0) {
+                // draw
+                this.winner = 'draw';
+            } else if (value <= 0) {
+                // player lost
+                this.winner = 'monster';
+            }
+        },
+
+        monsterHealth(value) {
+            if (value <= 0 && this.playerHealth <= 0) {
+                // draw
+                this.winner = 'draw';
+            } else if (value <= 0) {
+                // monster lost
+                this.winner = 'player';
+            }
+        },
     },
     computed: {
         monsterBarStyle() {
@@ -33,6 +56,7 @@ const app = Vue.createApp({
             this.monsterHealth = 100;
             this.currentRound = 0;
             this.winner = null;
+            this.logs = [];
         },
         attackMonster() {
             const attackValue = getRandomNumber(12, 5);
@@ -43,11 +67,17 @@ const app = Vue.createApp({
 
             // update round count
             this.currentRound++;
+
+            // log
+            this.addLogMessage('player', 'attack', attackValue);
         },
 
         attackPlayer() {
             const attackValue = getRandomNumber(15, 8);
             this.playerHealth -= attackValue;
+
+            // log
+            this.addLogMessage('monster', 'attack', attackValue);
         },
 
         // special attack
@@ -60,6 +90,9 @@ const app = Vue.createApp({
 
             // update round count
             this.currentRound++;
+
+            // log
+            this.addLogMessage('player', 'special-attack', attackValue);
         },
 
         healPlayer() {
@@ -72,34 +105,26 @@ const app = Vue.createApp({
 
             this.currentRound++;
 
+            // log
+            this.addLogMessage('player', 'heal', healValue);
+
             // monster attack after player heal
             this.attackPlayer();
         },
 
         surrender() {
             this.winner = 'monster';
-        },
-    },
 
-    watch: {
-        playerHealth(value) {
-            if (value <= 0 && this.monsterHealth <= 0) {
-                // draw
-                this.winner = 'draw';
-            } else if (value <= 0) {
-                // player lost
-                this.winner = 'monster';
-            }
+            // log
+            this.addLogMessage('player', 'surrender', null);
         },
 
-        monsterHealth(value) {
-            if (value <= 0 && this.playerHealth <= 0) {
-                // draw
-                this.winner = 'draw';
-            } else if (value <= 0) {
-                // monster lost
-                this.winner = 'player';
-            }
+        addLogMessage(who, what, value) {
+            this.logs.unshift({
+                actionBy: who,
+                actionType: what,
+                actionValue: value,
+            });
         },
     },
 });
