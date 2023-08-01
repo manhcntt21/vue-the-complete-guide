@@ -17,9 +17,7 @@
   </header>
   <section id="app">
     <ul>
-      <friend-contact></friend-contact>
-      <friend-contact></friend-contact>
-      <friend-contact></friend-contact>
+      <friend-contact v-for="friend in friends" :friend="friend" :key="friend.id"></friend-contact>
     </ul>
   </section>
 </body>

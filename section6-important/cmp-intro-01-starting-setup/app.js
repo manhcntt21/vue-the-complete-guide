@@ -37,16 +37,11 @@ app.component('friend-contact', {
             </ul>
         </li>    
       `,
+    props: ['friend'],
 
     data() {
         return {
             detailVisible: false,
-            friend: {
-                id: 'manuel',
-                name: 'Manuel Lorenz',
-                phone: '01234 5678 991',
-                email: 'manuel@localhost.com',
-            },
         };
     },
 
