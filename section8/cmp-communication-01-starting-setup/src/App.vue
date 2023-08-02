@@ -5,15 +5,11 @@
         </header>
         <ul>
             <friend-contact
-                name="Manuel Lorenz"
-                phone-number="01234 56789 90"
-                is-favorite="1"
-                :bind-value="hello"
-            ></friend-contact>
-            <friend-contact
-                name="Julie Jones"
-                phone-number="0987 654421 21"
-                is-favorite="2"
+                v-for="friend in friends"
+                :key="friend.id"
+                :name="friend.name"
+                :phone-number="friend.phone"
+                :is-favorite="true"
                 :bind-value="hello"
             ></friend-contact>
         </ul>
