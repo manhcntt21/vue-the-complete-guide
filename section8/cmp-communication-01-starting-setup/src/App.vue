@@ -21,6 +21,12 @@
         >
         <base-button class="btn">click me2</base-button>
         <base-button class="btn large">click me3</base-button>
+
+        <!-- <user-data
+            :firstName="person.firstName"
+            :lastName="person.lastName"
+        ></user-data> -->
+        <user-data v-bind="person"></user-data>
     </section>
 </template>
 
@@ -45,15 +51,17 @@ export default {
                     isFavorite: false,
                 },
             ],
+            person: {
+                firstName: 'Max',
+                lastName: 'Schwarz',
+            },
         };
     },
-
     methods: {
         toggleFavoriteStatus(friendId) {
             const friend = this.friends.find(f => f.id === friendId);
             friend.isFavorite = !friend.isFavorite;
         },
-
         doSomething() {
             console.log('do something!');
         },
