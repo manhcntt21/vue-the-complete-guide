@@ -14,6 +14,7 @@
                 :is-favorite="friend.isFavorite"
                 :bind-value="hello"
                 @toggle-favorite="toggleFavoriteStatus"
+                @delete-friend="deleteFriend"
             ></friend-contact>
         </ul>
 
@@ -77,6 +78,9 @@ export default {
             };
             this.friends.push(newFriendContact);
             // console.log(newFriendContact);
+        },
+        deleteFriend(id) {
+            this.friends = this.friends.filter(f => f.id != id);
         },
     },
 };

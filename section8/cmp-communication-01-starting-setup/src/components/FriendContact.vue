@@ -15,6 +15,8 @@
             </li>
             <li>{{ bindValue }}</li>
         </ul>
+
+        <button @click="$emit('deleteFriend', id)">Delete</button>
     </li>
 </template>
 
@@ -47,7 +49,7 @@ export default {
         },
     },
 
-    emits: ['toggle-favorite'],
+    emits: ['toggle-favorite', 'deleteFriend'],
     // emits: {
     //     'toggle-favorite': function (id) {
     //         if (id) {
@@ -75,6 +77,10 @@ export default {
             // }
             this.$emit('toggle-favorite', this.id);
         },
+
+        // deleteFriend() {
+        //     this.$emit('deleteFriend', this.id);
+        // },
     },
 };
 </script>
