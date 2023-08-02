@@ -15,6 +15,12 @@
                 @toggle-favorite="toggleFavoriteStatus"
             ></friend-contact>
         </ul>
+
+        <base-button type="submit" @click="doSomething" class="large"
+            >click me</base-button
+        >
+        <base-button class="btn">click me2</base-button>
+        <base-button class="btn large">click me3</base-button>
     </section>
 </template>
 
@@ -46,6 +52,10 @@ export default {
         toggleFavoriteStatus(friendId) {
             const friend = this.friends.find(f => f.id === friendId);
             friend.isFavorite = !friend.isFavorite;
+        },
+
+        doSomething() {
+            console.log('do something!');
         },
     },
 };
