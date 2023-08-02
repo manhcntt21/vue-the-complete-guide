@@ -16,13 +16,14 @@
                 <strong>Email:</strong>
                 {{ friend.email }}
             </li>
+            <li>{{ bindValue }}</li>
         </ul>
     </li>
 </template>
 
 <script>
 export default {
-    props: ['name', 'phoneNumber', 'isFavorite'],
+    props: ['name', 'phoneNumber', 'isFavorite', 'bindValue'],
 
     data() {
         return {

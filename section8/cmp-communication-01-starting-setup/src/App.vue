@@ -8,6 +8,7 @@
                 name="Manuel Lorenz"
                 phone-number="01234 56789 90"
                 is-favorite="1"
+                :bind-value="hello"
             ></friend-contact>
             <friend-contact
                 name="Julie Jones"
@@ -22,6 +23,7 @@
 export default {
     data() {
         return {
+            hello: 'hello',
             friends: [
                 {
                     id: 'manuel',
