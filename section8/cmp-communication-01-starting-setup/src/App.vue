@@ -13,7 +13,8 @@
             <friend-contact
                 name="Julie Jones"
                 phone-number="0987 654421 21"
-                is-favorite="0"
+                is-favorite="2"
+                :bind-value="hello"
             ></friend-contact>
         </ul>
     </section>

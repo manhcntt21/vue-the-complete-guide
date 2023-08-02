@@ -23,7 +23,25 @@
 
 <script>
 export default {
-    props: ['name', 'phoneNumber', 'isFavorite', 'bindValue'],
+    // props: ['name', 'phoneNumber', 'isFavorite', 'bindValue'],
+    props: {
+        name: {
+            type: String,
+            required: true,
+        },
+        phoneNumber: {
+            type: String,
+            required: true,
+        },
+        isFavorite: {
+            type: String,
+            required: false,
+            default: '0',
+            validator: function (value) {
+                return value === '1' || value === '0';
+            },
+        },
+    },
 
     data() {
         return {
