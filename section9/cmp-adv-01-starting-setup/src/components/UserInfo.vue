@@ -1,14 +1,19 @@
 <template>
     <section>
         <base-card>
-            <header>
+            <!-- an theo slot co ten trong base card-->
+            <template v-slot:header>
                 <h3>{{ fullName }}</h3>
                 <base-badge
                     :type="role"
                     :caption="role.toUpperCase()"
                 ></base-badge>
-            </header>
-            <p>{{ infoText }}</p>
+            </template>
+            <!-- default slot trong base card-->
+            <!-- <p>{{ infoText }}</p> -->
+            <template v-slot:default>
+                <p>{{ infoText }}</p>
+            </template>
         </base-card>
     </section>
 </template>
@@ -19,10 +24,4 @@ export default {
 };
 </script>
 
-<style scoped>
-section header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-</style>
+<style scoped></style>
