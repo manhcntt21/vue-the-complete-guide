@@ -2,7 +2,7 @@
     <section>
         <base-card>
             <!-- an theo slot co ten trong base card-->
-            <template v-slot:header>
+            <template #header>
                 <h3>{{ fullName }}</h3>
                 <base-badge
                     :type="role"
@@ -11,7 +11,7 @@
             </template>
             <!-- default slot trong base card-->
             <!-- <p>{{ infoText }}</p> -->
-            <template v-slot:default>
+            <template #default>
                 <p>{{ infoText }}</p>
             </template>
         </base-card>
