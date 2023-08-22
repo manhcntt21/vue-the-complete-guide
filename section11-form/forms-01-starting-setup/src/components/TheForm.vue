@@ -98,6 +98,9 @@
         <label for="how-other">Other</label>
       </div>
     </div>
+    <div class="form-contro">
+      <rating-control></rating-control>
+    </div>
     <div class="form-control">
       <input
         id="confirm-terms"
@@ -114,6 +117,8 @@
   </form>
 </template>
 <script>
+import RatingControl from './RatingControl.vue';
+
 export default {
   data() {
     return {
@@ -152,6 +157,7 @@ export default {
       }
     },
   },
+  components: { RatingControl },
 };
 </script>
 <style scoped>
