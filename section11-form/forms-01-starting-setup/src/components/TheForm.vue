@@ -1,16 +1,32 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div
+      class="form-control"
+      :class="{ invalid: userNameValidity === 'invalid' }"
+    >
       <label for="user-name">Your Name</label>
-      <input id="user-name" name="user-name" type="text" v-model="userName" />
+      <input
+        id="user-name"
+        name="user-name"
+        type="text"
+        v-model="userName"
+        @blur="validateInput"
+      />
+      <p v-if="userNameValidity === 'invalid'">Please enter a valid name</p>
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
-      <input id="age" name="age" type="number" />
+      <input
+        id="age"
+        name="age"
+        type="number"
+        v-model="userAge"
+        ref="ageInput"
+      />
     </div>
     <div class="form-control">
       <label for="referrer">How did you hear about us?</label>
-      <select id="referrer" name="referrer">
+      <select id="referrer" name="referrer" v-model="referer">
         <option value="google">Google</option>
         <option value="wom">Word of mouth</option>
         <option value="newspaper">Newspaper</option>
@@ -19,32 +35,78 @@
     <div class="form-control">
       <h2>What are you interested in?</h2>
       <div>
-        <input id="interest-news" name="interest" type="checkbox" />
+        <input
+          id="interest-news"
+          name="interest"
+          type="checkbox"
+          value="news"
+          v-model="interest"
+        />
         <label for="interest-news">News</label>
       </div>
       <div>
-        <input id="interest-tutorials" name="interest" type="checkbox" />
+        <input
+          id="interest-tutorials"
+          name="interest"
+          type="checkbox"
+          value="tutorials"
+          v-model="interest"
+        />
         <label for="interest-tutorials">Tutorials</label>
       </div>
       <div>
-        <input id="interest-nothing" name="interest" type="checkbox" />
+        <input
+          id="interest-nothing"
+          name="interest"
+          type="checkbox"
+          value="'nothing'"
+          v-model="interest"
+        />
         <label for="interest-nothing">Nothing</label>
       </div>
     </div>
     <div class="form-control">
       <h2>How do you learn?</h2>
       <div>
-        <input id="how-video" name="how" type="radio" />
+        <input
+          id="how-video"
+          name="how"
+          type="radio"
+          value="video"
+          v-model="how"
+        />
         <label for="how-video">Video Courses</label>
       </div>
       <div>
-        <input id="how-blogs" name="how" type="radio" />
+        <input
+          id="how-blogs"
+          name="how"
+          type="radio"
+          value="blog "
+          v-model="how"
+        />
         <label for="how-blogs">Blogs</label>
       </div>
       <div>
-        <input id="how-other" name="how" type="radio" />
+        <input
+          id="how-other"
+          name="how"
+          type="radio"
+          value="other"
+          v-model="how"
+        />
         <label for="how-other">Other</label>
       </div>
+    </div>
+    <div class="form-control">
+      <input
+        id="confirm-terms"
+        name="confirm-terms"
+        value=""
+        type="checkbox"
+        v-model="confirm"
+      />
+      <label for="confirm-terms">Agree to terms of use?</label>
     </div>
     <div>
       <button>Save Data</button>
@@ -56,11 +118,38 @@ export default {
   data() {
     return {
       userName: '',
+      userAge: null,
+      referer: 'google',
+      interest: [],
+      how: null,
+      confirm: false,
+      userNameValidity: 'pending',
     };
   },
   methods: {
     submitForm() {
-      console.log('a');
+      console.log('Username ' + this.userName);
+      this.userName = '';
+      console.log('UserAge:');
+      console.log(this.userAge + 5);
+      console.log(this.$refs.ageInput.value + 5);
+      console.log(31);
+      this.userAge = null;
+      console.log(this.referer);
+      this.referer = 'google';
+      console.log(this.interest);
+      this.interest = [];
+      console.log(this.how);
+      this.how = null;
+      console.log(this.confirm);
+      this.confirm = false;
+    },
+    validateInput() {
+      if (this.userName.trim() === '') {
+        this.userNameValidity = 'invalid';
+      } else {
+        this.userNameValidity = 'valid';
+      }
     },
   },
 };
@@ -77,6 +166,14 @@ form {
 
 .form-control {
   margin: 0.5rem 0;
+}
+
+.form-control.invalid input {
+  border-color: red;
+}
+
+.form-control.invalid label {
+  color: red;
 }
 
 label {
