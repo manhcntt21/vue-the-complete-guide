@@ -99,9 +99,13 @@
       </div>
     </div>
     <div class="form-contro">
-      <!-- <rating-control v-model="rating" :model-value="" @update:modelValue=""></rating-control> -->
+      <rating-control
+        v-model="rating"
+        :model-value="rating"
+        @update:modelValue="updateRating"
+      ></rating-control>
       <!-- same v-model -->
-      <rating-control v-model="rating"></rating-control>
+      <!-- <rating-control v-model="rating"></rating-control> -->
     </div>
     <div class="form-control">
       <input
@@ -161,6 +165,9 @@ export default {
       } else {
         this.userNameValidity = 'valid';
       }
+    },
+    updateRating(rating) {
+      this.rating = rating;
     },
   },
   components: { RatingControl },
