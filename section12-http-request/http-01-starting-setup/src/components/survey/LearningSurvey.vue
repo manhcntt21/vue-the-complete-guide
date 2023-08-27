@@ -41,6 +41,7 @@
         <p v-if="invalidInput">
           One or more input fields are invalid. Please check your provided data.
         </p>
+        <p v-else-if="!error">{{ error }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -58,6 +59,7 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      error: null,
     };
   },
   // emits: ['survey-submit'],
@@ -68,7 +70,7 @@ export default {
         return;
       }
       this.invalidInput = false;
-
+      this.error = null;
       // this.$emit('survey-submit', {
       //   userName: this.enteredName,
       //   rating: this.chosenRating,
@@ -88,10 +90,24 @@ export default {
       // );
 
       // use with axios
-      axios.post(
-        'https://vue-http-demo-eae6b-default-rtdb.asia-southeast1.firebasedatabase.app/surveys.json',
-        { name: this.enteredName, rating: this.chosenRating }
-      );
+      //  'https://vue-http-demo-eae6b-default-rtdb.asia-southeast1.firebasedatabase.app/surveys - erro something went wrong
+      axios
+        .post(
+          'https://vue-http-demo-eae6b-default-rtdb.asia-southeast1.firebasedatabase.app/surveys.json',
+          { name: this.enteredName, rating: this.chosenRating }
+        )
+        .then((response) => {
+          console.log(response);
+          if (response.statusText === 'OK') {
+            /// ...
+          } else {
+            throw new Error('Could not save data');
+          }
+        })
+        .catch((e) => {
+          console.log(e.message);
+          this.error = e.message;
+        });
       this.enteredName = '';
       this.chosenRating = null;
     },
