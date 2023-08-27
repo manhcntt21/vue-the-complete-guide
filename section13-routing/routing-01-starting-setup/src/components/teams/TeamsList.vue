@@ -4,6 +4,7 @@
       v-for="team in teams"
       :key="team.id"
       :name="team.name"
+      :id="team.id"
       :member-count="team.members.length"
     ></teams-item>
   </ul>
