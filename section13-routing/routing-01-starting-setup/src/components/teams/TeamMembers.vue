@@ -49,6 +49,8 @@ export default {
   created() {
     console.log(this.id);
     this.loadTeamsMembers(this.id);
+    console.log(this.$route.query.sort);
+    // handle sort
   },
 
   watch: {
