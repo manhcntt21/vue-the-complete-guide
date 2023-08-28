@@ -19,11 +19,13 @@ const router = createRouter({
       path: '/teams',
       component: TeamsList,
       // alias: '/',
-    },
-    {
-      path: '/teams/:id',
-      component: TeamMembers,
-      props: true,
+      children: [
+        {
+          path: ':id',
+          component: TeamMembers,
+          props: true,
+        },
+      ],
     },
     {
       path: '/users',
@@ -34,7 +36,7 @@ const router = createRouter({
       component: NotFound,
     },
   ],
-  linkActiveClass: 'router-link-active',
+  // linkActiveClass: 'active',
 });
 const app = createApp(App);
 app.use(router);
