@@ -2,7 +2,8 @@
   <li>
     <h3>{{ name }}</h3>
     <div class="team-members">{{ memberCount }} Members</div>
-    <router-link :to="teamMembersLink">View Members</router-link>
+    <!-- <router-link :to="teamMembersLink">View Members</router-link> -->
+    <button @click="loadElement">View Members</button>
   </li>
 </template>
 
@@ -13,7 +14,14 @@ export default {
     teamMembersLink() {
       // return '/teams/' + this.id;
       return { name: 'team-members', params: { id: this.id } };
-      // this.$route.push({ name: 'team-members', params: { id: this.id } });
+    },
+  },
+  methods: {
+    loadElement() {
+      this.$router.push({
+        name: 'team-members',
+        params: { id: this.id },
+      });
     },
   },
 };
