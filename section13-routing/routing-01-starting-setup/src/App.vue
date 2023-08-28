@@ -51,6 +51,7 @@ export default {
 
 html {
   font-family: sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
