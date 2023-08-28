@@ -3,18 +3,18 @@
   <main>
     <router-view></router-view>
   </main>
-  <team-members id="t1"></team-members>
+  <!-- <team-members id="t1"></team-members> -->
 </template>
 
 <script>
 // import TeamsList from './components/teams/TeamsList.vue';
 // import UsersList from './components/users/UsersList.vue';
 import TheNavigation from './components/nav/TheNavigation.vue';
-import TeamMembers from './components/teams/TeamMembers.vue';
+// import TeamMembers from './components/teams/TeamMembers.vue';
 export default {
   components: {
     TheNavigation,
-    TeamMembers,
+    // TeamMembers,
   },
   data() {
     return {
