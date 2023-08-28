@@ -48,14 +48,25 @@ const router = createRouter({
   ],
   // linkActiveClass: 'active',
   // vue router tu dong goi khi change url
-  scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition);
+  scrollBehavior(_, _2, savedPosition) {
+    // console.log(to, from, savedPosition);
     if (savedPosition) {
       return savedPosition;
     } else {
       return { left: 0, top: 0 };
     }
   },
+});
+router.beforeEach(function (to, from, next) {
+  console.log('Global beforEach');
+  console.log(to, from);
+  // next(false);
+  // if (to.name === 'team-members') {
+  //   next();
+  // } else {
+  //   next({ name: 'team-members', params: { id: 't2' } });
+  // }
+  next(true);
 });
 const app = createApp(App);
 app.use(router);
