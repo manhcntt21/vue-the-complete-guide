@@ -4,6 +4,9 @@
     <router-view></router-view>
   </main>
   <!-- <team-members id="t1"></team-members> -->
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>
