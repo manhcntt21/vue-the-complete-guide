@@ -53,6 +53,14 @@ export default {
     // handle sort
   },
 
+  beforeRouteUpdate(to, from, next) {
+    console.log('TeamMembers Component beforeRouteUpdate');
+    // console.log(to);
+    // console.log(to.params.id);
+    console.log(to, from);
+    // this.loadTeamsMembers(to.params.id);
+    next();
+  },
   watch: {
     id(newId) {
       // console.log(newId);
