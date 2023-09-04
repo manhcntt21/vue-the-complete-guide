@@ -1,48 +1,21 @@
 <template>
-  <div class="container">
-    <users-list></users-list>
-  </div>
-  <div class="container">
-    <div class="block" :class="{ animate: animatedBlock }"></div>
-    <button @click="animateBlock">Animate</button>
-  </div>
-  <div class="container">
-    <Transition
-      :css="false"
-      name="para"
-      @before-enter="beforeEnter"
-      @enter="enter"
-      @before-leave="beforeLeave"
-      @after-enter="afterEnter"
-      @leave="leave"
-      @after-leave="afterLeave"
-      @enter-cancelled="enterCancelled"
-      @leave-cancelled="leaveCancelled"
-    >
-      <p v-show="paraIsVisible">This is only sometimes visible...</p>
-    </Transition>
-    <button @click="tagggleParagraph">Toggle Button</button>
-  </div>
-  <div class="container">
+  <!--  cach moi -->
+  <router-view v-slot="slotProps">
     <transition name="fade-button" mode="out-in">
-      <button @click="showUser" v-if="!usersAreVisible">Show users</button>
-      <button @click="hideUser" v-else>Hide Users</button>
+      <component :is="slotProps.Component"></component>
     </transition>
-  </div>
-  <base-modal @close="hideDialog" :open="dialogIsVisible">
-    <p>This is a test dialog!</p>
-    <button @click="hideDialog">Close it!</button>
-  </base-modal>
-  <div class="container">
-    <button @click="showDialog">Show Dialog</button>
-  </div>
+  </router-view>
+  <!--  cach cu -->
+  <!-- <transition name="fade-button">
+    <router-view> </router-view>
+  </transition> -->
 </template>
 
 <script>
-import UsersList from './components/UsersList.vue';
+// import UsersList from './components/UsersList.vue';
 
 export default {
-  components: { UsersList },
+  // components: { UsersList },
   data() {
     return {
       animatedBlock: false,
@@ -216,5 +189,16 @@ button:active {
 .fade-button-enter-to,
 .fade-button-leave-from {
   opacity: 1;
+}
+
+.route-enter-from {
+}
+.route-enter-active {
+  animation: slide-fade 0.4s ease-out;
+}
+.route-live-active {
+  animation: slide-fade 0.4s ease-in;
+}
+.route-enter-to {
 }
 </style>
