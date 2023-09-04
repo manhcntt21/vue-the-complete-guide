@@ -5,6 +5,7 @@ import App from './App.vue';
 import { createStore } from 'vuex';
 
 const counterModule = {
+  // local state
   state() {
     return {
       counter: 0,
@@ -16,6 +17,7 @@ const counterModule = {
     },
 
     increase(state, payload) {
+      console.log(state);
       state.counter = state.counter + payload.value;
     },
   },
@@ -32,6 +34,7 @@ const counterModule = {
       // gia tri o day la mutation
       // run asynchronous code
       console.log(context);
+      console.log(context.state);
       setTimeout(function () {
         context.commit('increase', payload);
       }, 2000);
@@ -39,6 +42,13 @@ const counterModule = {
   },
 
   getters: {
+    testAuth(state, getters, rootStates, rootGetters) {
+      console.log(state);
+      console.log(getters);
+      console.log(rootStates);
+      console.log(rootGetters);
+      return state.isLoggedIn;
+    },
     finalCounter(state) {
       return state.counter * 3;
     },
