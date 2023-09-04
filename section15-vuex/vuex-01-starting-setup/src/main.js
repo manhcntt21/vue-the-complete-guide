@@ -7,6 +7,7 @@ const store = createStore({
   state() {
     return {
       counter: 0,
+      isLoggedIn: false,
     };
   },
   mutations: {
@@ -17,6 +18,9 @@ const store = createStore({
 
     increase(state, payload) {
       state.counter = state.counter + payload.value;
+    },
+    setAuth(state, payload) {
+      state.isLoggedIn = payload.isAuth;
     },
   },
   actions: {
@@ -35,6 +39,13 @@ const store = createStore({
         context.commit('increase', payload);
       }, 2000);
     },
+
+    login(context) {
+      context.commit('setAuth', { isAuth: true });
+    },
+    logout(context) {
+      context.commit('setAuth', { isAuth: false });
+    },
   },
   getters: {
     finalCounter(state) {
@@ -44,6 +55,9 @@ const store = createStore({
     normalizeCounter(_, getters) {
       const finalCounter = getters.finalCounter;
       return finalCounter > 100 ? 100 : finalCounter < 0 ? 0 : finalCounter;
+    },
+    userIsAuthenticated(state) {
+      return state.isLoggedIn;
     },
   },
 });
