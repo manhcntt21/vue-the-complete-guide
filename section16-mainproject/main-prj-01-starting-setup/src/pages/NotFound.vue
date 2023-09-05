@@ -1,5 +1,3 @@
-<template>
-  <slot></slot>
-</template>
+<template>NOT FOUND</template>
 
 <script></script>

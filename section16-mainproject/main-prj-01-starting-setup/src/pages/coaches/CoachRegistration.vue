@@ -1,5 +1,3 @@
-<template>
-  <slot></slot>
-</template>
+<template>REGISTER</template>
 
 <script></script>
