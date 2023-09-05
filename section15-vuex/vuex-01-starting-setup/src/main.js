@@ -5,6 +5,7 @@ import App from './App.vue';
 import { createStore } from 'vuex';
 
 const counterModule = {
+  namespaced: true,
   // local state
   state() {
     return {
@@ -42,13 +43,13 @@ const counterModule = {
   },
 
   getters: {
-    testAuth(state, getters, rootStates, rootGetters) {
-      console.log(state);
-      console.log(getters);
-      console.log(rootStates);
-      console.log(rootGetters);
-      return state.isLoggedIn;
-    },
+    // testAuth(state, getters, rootStates, rootGetters) {
+    //   console.log(state);
+    //   console.log(getters);
+    //   console.log(rootStates);
+    //   console.log(rootGetters);
+    //   return state.isLoggedIn;
+    // },
     finalCounter(state) {
       return state.counter * 3;
     },
@@ -60,8 +61,9 @@ const counterModule = {
   },
 };
 const store = createStore({
+  // nambers chinh la namespace cua module
   modules: {
-    number: counterModule,
+    numbers: counterModule,
   },
   state() {
     return {
