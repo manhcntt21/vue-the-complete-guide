@@ -8,15 +8,13 @@
         <base-button mode="outline">Refresh</base-button>
         <base-button link to="/register">Register as Coach</base-button>
       </div>
-      <ul v-if="hasCoachesU">
-        <coach-item v-for="coach in coachesList" :key="coach.id" v-bind="coach">
+      <ul v-if="this.coaches && this.coaches.length > 0">
+        <coach-item v-for="coach in coaches" :key="coach.id" v-bind="coach">
         </coach-item>
       </ul>
       <h3 v-else>No coaches found</h3>
     </base-card>
   </section>
-  <!-- {{ this.coachesList }}
-  {{ this.coaches }} -->
 </template>
 
 <script>
@@ -31,11 +29,24 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('coaches', ['coaches', 'hasCoaches']),
-    // coaches() {
-    //   console.log('a');
-    //   const coaches = this.$store.getters['coaches/coaches'];
-    //   return coaches.filter((coach) => {
+    ...mapGetters('coaches', ['hasCoaches']),
+    coaches() {
+      const coaches = this.$store.getters['coaches/coaches'];
+      return coaches.filter((coach) => {
+        if (this.activeFilter.frontend && coach.areas.includes('frontend')) {
+          return true;
+        }
+        if (this.activeFilter.backend && coach.areas.includes('backend')) {
+          return true;
+        }
+        if (this.activeFilter.career && coach.areas.includes('career')) {
+          return true;
+        }
+        return false;
+      });
+    },
+    // coachesList() {
+    //   return this.coaches.filter((coach) => {
     //     if (this.activeFilter.frontend && coach.areas.includes('frontend')) {
     //       return true;
     //     }
@@ -48,24 +59,10 @@ export default {
     //     return false;
     //   });
     // },
-    coachesList() {
-      return this.coaches.filter((coach) => {
-        if (this.activeFilter.frontend && coach.areas.includes('frontend')) {
-          return true;
-        }
-        if (this.activeFilter.backend && coach.areas.includes('backend')) {
-          return true;
-        }
-        if (this.activeFilter.carrer && coach.areas.includes('carrer')) {
-          return true;
-        }
-        return false;
-      });
-    },
 
-    hasCoachesU() {
-      return this.coachesList && this.coachesList.length > 0;
-    },
+    // hasCoachesU() {
+    //   return this.coachesList && this.coachesList.length > 0;
+    // },
   },
   methods: {
     setFilter(updateFilter) {
