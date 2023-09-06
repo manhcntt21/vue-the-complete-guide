@@ -20,9 +20,7 @@
   </li>
 </template>
 <script>
-import BaseBadge from '../ui/BaseBadge.vue';
 export default {
-  components: { BaseBadge },
   props: ['id', 'firstName', 'lastName', 'areas', 'description', 'hourlyRate'],
   data() {
     return {};
