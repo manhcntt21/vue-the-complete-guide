@@ -24,7 +24,6 @@
       ></base-badge>
       <p>{{ description }}</p>
     </base-card>
-    {{ areas }}
   </section>
 </template>
 

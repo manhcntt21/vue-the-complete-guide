@@ -19,15 +19,15 @@
     <div class="form-controls">
       <h3>Areas of Expertise</h3>
       <div>
-        <input type="checkbox" id="frontend" v-model="areas" />
+        <input type="checkbox" id="frontend" v-model="areas" value="frontend" />
         <label for="frontend">Frontend Development</label>
       </div>
       <div>
-        <input type="checkbox" id="backend" v-model="areas" />
+        <input type="checkbox" id="backend" v-model="areas" value="backend" />
         <label for="backend">Backend Development</label>
       </div>
       <div>
-        <input type="checkbox" id="career" v-model="areas" />
+        <input type="checkbox" id="career" v-model="areas" value="career" />
         <label for="career">Career Advisory</label>
       </div>
     </div>
@@ -36,7 +36,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
+  emits: ['save-data'],
   data() {
     return {
       firstName: '',
@@ -46,7 +49,9 @@ export default {
       areas: [],
     };
   },
-
+  computed: {
+    ...mapGetters('coaches', ['coaches']),
+  },
   methods: {
     submitForm() {
       const formData = {
@@ -58,6 +63,7 @@ export default {
       };
 
       console.log(formData);
+      this.$emit('save-data', formData);
     },
   },
 };

@@ -6,7 +6,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/register">Register as Coach</base-button>
+        <base-button v-if="!isCoach" link to="/register"
+          >Register as Coach</base-button
+        >
       </div>
       <ul v-if="this.coaches && this.coaches.length > 0">
         <coach-item v-for="coach in coaches" :key="coach.id" v-bind="coach">
@@ -29,7 +31,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('coaches', ['hasCoaches']),
+    ...mapGetters('coaches', ['hasCoaches', 'isCoach']),
     coaches() {
       const coaches = this.$store.getters['coaches/coaches'];
       return coaches.filter((coach) => {
