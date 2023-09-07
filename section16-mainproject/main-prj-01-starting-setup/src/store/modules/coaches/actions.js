@@ -3,4 +3,32 @@ export default {
     payload.coach.id = conext.rootGetters.userId;
     conext.commit('registerCoach', payload);
   },
+
+  async loadCoaches(conext) {
+    const response = await fetch(
+      `https://vue-http-demo-eae6b-default-rtdb.asia-southeast1.firebasedatabase.app/coaches.json`
+    );
+
+    const responseData = await response.json();
+
+    if (!responseData.ok) {
+      //...error
+    }
+
+    const coaches = [];
+
+    for (const key in responseData) {
+      const coach = {
+        id: key,
+        firstName: responseData[key].firstName,
+        lastName: responseData[key].lastName,
+        description: responseData[key].description,
+        rate: responseData[key].rate,
+        areas: responseData[key].areas,
+      };
+      coaches.push(coach);
+    }
+
+    conext.commit('setCoaches', { coaches: coaches });
+  },
 };
