@@ -45,6 +45,7 @@ export default {
         },
       });
       this.$router.replace('/coaches');
+      console.log(this.$route.params.id);
     },
   },
 };

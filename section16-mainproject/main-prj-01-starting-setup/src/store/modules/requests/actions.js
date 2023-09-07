@@ -2,7 +2,7 @@ export default {
   contachCoach(context, payload) {
     const newRequest = {
       id: new Date().toISOString(),
-      coachId: payload.coachId,
+      coachId: payload.request.coachId,
       userEmail: payload.request.email,
       message: payload.request.message,
     };

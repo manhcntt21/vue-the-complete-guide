@@ -100,7 +100,6 @@ export default {
   },
   methods: {
     clearValidity(input) {
-      console.log('a');
       this[input].isValid = true;
     },
     validateForm() {
