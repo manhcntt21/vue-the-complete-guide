@@ -8,11 +8,11 @@ export default {
     const response = await fetch(
       `https://vue-http-demo-eae6b-default-rtdb.asia-southeast1.firebasedatabase.app/coaches.json`
     );
-
     const responseData = await response.json();
-
-    if (!responseData.ok) {
+    if (!response.ok) {
       //...error
+      const error = new Error(responseData.message || 'Failed to fetch!');
+      throw error;
     }
 
     const coaches = [];
