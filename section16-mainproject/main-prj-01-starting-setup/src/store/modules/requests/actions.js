@@ -1,1 +1,11 @@
-export default {};
+export default {
+  contachCoach(context, payload) {
+    const newRequest = {
+      id: new Date().toISOString(),
+      coachId: payload.coachId,
+      userEmail: payload.request.email,
+      message: payload.request.message,
+    };
+    context.commit('addRequest', { request: newRequest });
+  },
+};
