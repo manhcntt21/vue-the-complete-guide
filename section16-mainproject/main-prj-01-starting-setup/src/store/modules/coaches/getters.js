@@ -14,4 +14,13 @@ export default {
     // console.log(coaches, userId);
     return coaches.some((coach) => coach.id === userId);
   },
+
+  shouldUpdate(state) {
+    const lastFetch = state.lastFetch;
+    if (!lastFetch) {
+      return true;
+    }
+    const currentTimesTamp = new Date().getTime();
+    return (currentTimesTamp - lastFetch) / 1000 > 60; // 1 minute
+  },
 };

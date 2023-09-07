@@ -4,7 +4,10 @@ export default {
     conext.commit('registerCoach', payload);
   },
 
-  async loadCoaches(conext) {
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+      return;
+    }
     const response = await fetch(
       `https://vue-http-demo-eae6b-default-rtdb.asia-southeast1.firebasedatabase.app/coaches.json`
     );
@@ -29,6 +32,7 @@ export default {
       coaches.push(coach);
     }
 
-    conext.commit('setCoaches', { coaches: coaches });
+    context.commit('setCoaches', { coaches: coaches });
+    context.commit('setFetchTimestamp');
   },
 };
