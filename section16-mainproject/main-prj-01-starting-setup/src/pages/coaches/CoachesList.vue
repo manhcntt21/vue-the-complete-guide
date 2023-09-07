@@ -40,6 +40,7 @@ export default {
   },
   computed: {
     ...mapGetters('coaches', ['hasCoaches', 'isCoach']),
+    ...mapGetters('requests', ['requests']),
     coaches() {
       const coaches = this.$store.getters['coaches/coaches'];
       return coaches.filter((coach) => {
