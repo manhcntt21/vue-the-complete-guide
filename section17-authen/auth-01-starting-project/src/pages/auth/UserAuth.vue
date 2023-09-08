@@ -42,6 +42,9 @@ export default {
       error: null,
     };
   },
+  created() {
+    this.informationUSer();
+  },
   computed: {
     submitButtonCaption() {
       if (this.mode === 'login') {
@@ -78,10 +81,12 @@ export default {
       try {
         if (this.mode === 'login') {
           await this.$store.dispatch('login', actionPayload);
-          this.$router.replace('/coaches');
         } else {
           await this.$store.dispatch('signup', actionPayload);
         }
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches');
+        console.log(redirectUrl);
+        this.$router.replace(redirectUrl);
       } catch (error) {
         this.error =
           error.message || 'Failed to authenticate. Check your login data.';
@@ -99,6 +104,11 @@ export default {
 
     handleError() {
       this.error = null;
+    },
+
+    informationUSer() {
+      console.log(this.$store.getters.userId);
+      console.log(this.$store.state.auth.userId);
     },
   },
 };
