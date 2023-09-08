@@ -1,25 +1,34 @@
 <template>
-  <base-card>
-    <form @submit.prevent="submitForm">
-      <div class="form-controls">
-        <label for="email">Email</label>
-        <input id="email" type="email" v-model.trim="email" />
-      </div>
+  <div>
+    <base-dialog :show="!!error" title="An error occurred" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <base-dialog :show="isLoading" fixed title="Authenticating...">
+      <p>Authenticating</p>
+      <base-spinner></base-spinner>
+    </base-dialog>
+    <base-card>
+      <form @submit.prevent="submitForm">
+        <div class="form-controls">
+          <label for="email">Email</label>
+          <input id="email" type="email" v-model.trim="email" />
+        </div>
 
-      <div class="form-controls">
-        <label for="password">Password</label>
-        <input id="password" type="password" v-model.trim="password" />
-      </div>
-      <p v-if="!formIsValid">
-        Please enter a valid email and password (must be at least 6 characters
-        long)
-      </p>
-      <base-button>{{ submitButtonCaption }}</base-button>
-      <base-button mode="flat" @click="switchAuthMode">{{
-        switchModeButtonCaption
-      }}</base-button>
-    </form>
-  </base-card>
+        <div class="form-controls">
+          <label for="password">Password</label>
+          <input id="password" type="password" v-model.trim="password" />
+        </div>
+        <p v-if="!formIsValid">
+          Please enter a valid email and password (must be at least 6 characters
+          long)
+        </p>
+        <base-button>{{ submitButtonCaption }}</base-button>
+        <base-button mode="flat" @click="switchAuthMode">{{
+          switchModeButtonCaption
+        }}</base-button>
+      </form>
+    </base-card>
+  </div>
 </template>
 <script>
 export default {
@@ -29,6 +38,8 @@ export default {
       password: '',
       formIsValid: true,
       mode: 'login',
+      isLoading: false,
+      error: null,
     };
   },
   computed: {
@@ -48,7 +59,7 @@ export default {
     },
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       this.formIsValid = true;
       if (
         this.email === '' ||
@@ -59,6 +70,22 @@ export default {
         return;
       }
       // send http request...
+      this.isLoading = true;
+      try {
+        if (this.mode === 'login') {
+          //...
+        } else {
+          await this.$store.dispatch('signup', {
+            email: this.email,
+            password: this.password,
+          });
+        }
+      } catch (error) {
+        this.error =
+          error.message || 'Failed to authenticate. Check your login data.';
+      }
+
+      this.isLoading = false;
     },
     switchAuthMode() {
       if (this.mode === 'login') {
@@ -66,6 +93,10 @@ export default {
       } else {
         this.mode = 'login';
       }
+    },
+
+    handleError() {
+      this.error = null;
     },
   },
 };
