@@ -17,7 +17,12 @@
     </section>
     <section>
       <base-card>
-        <base-badge v-for="area in areas" :key="area" :type="area" :title="area"></base-badge>
+        <base-badge
+          v-for="area in areas"
+          :key="area"
+          :type="area"
+          :title="area"
+        ></base-badge>
         <p>{{ description }}</p>
       </base-card>
     </section>
@@ -46,6 +51,7 @@ export default {
       return this.selectedCoach.description;
     },
     contactLink() {
+      console.log(this.$route.path);
       return this.$route.path + '/' + this.id + '/contact';
     },
   },
