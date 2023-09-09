@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, isRef, isReactive } from 'vue';
+import { ref, reactive, isRef, isReactive, toRefs } from 'vue';
 
 // data() {
 //   return {
@@ -33,6 +33,10 @@ setTimeout(() => {
 console.log(userName.value);
 console.log(isRef(userName.value), isRef(userName));
 console.log(isReactive(user.name), isReactive(user.age), isReactive(user));
+
+const userRefs = toRefs(user);
+console.log(userRefs);
+console.log(isRef(userRefs.name), isRef(userRefs.name));
 </script>
 
 <style>
