@@ -16,6 +16,7 @@
       :first-name="firstName"
       :last-name="lastName"
       :age="age"
+      @change-age="changeAge"
     ></user-data>
   </section>
 </template>
@@ -72,6 +73,10 @@ watch([age, userName], function (newValues, oldValues) {
   console.log('New userName: ' + newValues[1]);
 });
 // fullName.value = 10;
+
+function changeAge(newAge) {
+  age.value = newAge;
+}
 </script>
 
 <style>
