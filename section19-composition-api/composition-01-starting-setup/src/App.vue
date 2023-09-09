@@ -1,6 +1,10 @@
 <template>
   <section class="container">
     <h2>{{ userName }}</h2>
+    <h2>{{ age }}</h2>
+    <h2>{{ user }}</h2>
+    <h2>{{ user.name }}</h2>
+    <h2>{{ user.age }}</h2>
   </section>
 </template>
 
@@ -15,9 +19,15 @@ import { ref } from 'vue';
 
 // reference
 const userName = ref('Manh Do');
+const age = ref(27);
 
+const user = ref({
+  name: 'Manh Do',
+  age: 30,
+});
 setTimeout(() => {
   userName.value = 'Max';
+  age.value = 30;
 }, 2000);
 </script>
 
