@@ -6,8 +6,8 @@
     <h2>{{ fullName }}</h2>
     <button @click="setNewData">Change Age</button>
     <div>
-      <input type="text" pattern="First Name" @input="setFirstName" />
-      <input type="text" pattern="Last Name" @input="setLastName" />
+      <input type="text" placeholder="First Name" v-model="firstName" />
+      <input type="text" placeholder="Last Name" v-model="lastName" />
     </div>
   </section>
 </template>
@@ -35,18 +35,18 @@ function setNewData() {
 const firstName = ref('');
 const lastName = ref('');
 
-function setFirstName(e) {
-  firstName.value = e.target.value;
-}
-function setLastName(e) {
-  lastName.value = e.target.value;
-}
+// function setFirstName(e) {
+//   firstName.value = e.target.value;
+// }
+// function setLastName(e) {
+//   lastName.value = e.target.value;
+// }
 
 const fullName = computed(function () {
   return firstName.value + ' ' + lastName.value;
 });
 
-fullName.value = 10;
+// fullName.value = 10;
 </script>
 
 <style>
