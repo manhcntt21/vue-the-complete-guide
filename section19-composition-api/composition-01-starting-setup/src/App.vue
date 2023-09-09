@@ -3,13 +3,12 @@
     <h2>{{ userName }}</h2>
     <h2>{{ age }}</h2>
     <h2>{{ user }}</h2>
-    <h2>{{ user.name }}</h2>
-    <h2>{{ user.age }}</h2>
+    <button @click="setNewData">Change Age</button>
   </section>
 </template>
 
 <script setup>
-import { ref, reactive, isRef, isReactive, toRefs } from 'vue';
+import { ref, reactive } from 'vue';
 
 // data() {
 //   return {
@@ -20,23 +19,13 @@ import { ref, reactive, isRef, isReactive, toRefs } from 'vue';
 // reference
 const userName = ref('Manh Do');
 const age = ref(27);
-
 const user = reactive({
   name: 'Manh Do',
   age: 30,
 });
-setTimeout(() => {
-  userName.value = 'Max';
-  age.value = 30;
-  user.age = 20;
-}, 2000);
-console.log(userName.value);
-console.log(isRef(userName.value), isRef(userName));
-console.log(isReactive(user.name), isReactive(user.age), isReactive(user));
-
-const userRefs = toRefs(user);
-console.log(userRefs);
-console.log(isRef(userRefs.name), isRef(userRefs.name));
+function setNewData() {
+  user.age = 40;
+}
 </script>
 
 <style>
