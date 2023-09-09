@@ -11,11 +11,18 @@
       <button @click="setLastName">Set Last Name</button>
     </div>
   </section>
+  <section>
+    <user-data
+      :first-name="firstName"
+      :last-name="lastName"
+      :age="age"
+    ></user-data>
+  </section>
 </template>
 
 <script setup>
 import { ref, reactive, computed, watch } from 'vue';
-
+import UserData from './components/UserData.vue';
 // data() {
 //   return {
 //     userName: 'Maximilian',
