@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watch } from 'vue';
+import { ref, reactive, computed, watch, provide } from 'vue';
 import UserData from './components/UserData.vue';
 // data() {
 //   return {
@@ -74,6 +74,7 @@ watch([age, userName], function (newValues, oldValues) {
 });
 // fullName.value = 10;
 
+provide('user', user);
 function changeAge(newAge) {
   age.value = newAge;
 }

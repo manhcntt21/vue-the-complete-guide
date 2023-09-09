@@ -1,7 +1,10 @@
 <template>
-  <h2>{{ userName }}</h2>
-  <h2>{{ age }}</h2>
-  <button @click="changeAge">Change Age</button>
+  <section class="container">
+    <h2>{{ userName }}</h2>
+    <h2>{{ age }}</h2>
+    <button @click="changeAge">Change Age</button>
+    <h2>{{ user }}</h2>
+  </section>
 </template>
 <!-- <script>
 export default {
@@ -15,7 +18,7 @@ export default {
 </script> -->
 
 <script setup>
-import { defineProps, computed, defineEmits } from 'vue';
+import { defineProps, computed, defineEmits, inject } from 'vue';
 const props = defineProps({
   firstName: String,
   lastName: String,
@@ -31,4 +34,7 @@ const userName = computed(function () {
 function changeAge() {
   emit('change-age', 10);
 }
+
+const user = inject('user');
+console.log(user);
 </script>
