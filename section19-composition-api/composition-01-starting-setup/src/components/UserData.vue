@@ -18,7 +18,18 @@ export default {
 </script> -->
 
 <script setup>
-import { defineProps, computed, defineEmits, inject } from 'vue';
+import {
+  defineProps,
+  computed,
+  defineEmits,
+  inject,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue';
 const props = defineProps({
   firstName: String,
   lastName: String,
@@ -37,4 +48,23 @@ function changeAge() {
 
 const user = inject('user');
 console.log(user);
+
+onBeforeMount(function () {
+  console.log('onBeforeMount');
+});
+onMounted(function () {
+  console.log('onMounted');
+});
+onBeforeUpdate(function () {
+  console.log('onBeforeUpdate');
+});
+onUpdated(function () {
+  console.log('onUpdated');
+});
+onBeforeUnmount(function () {
+  console.log('onBeforeUnmount');
+});
+onUnmounted(function () {
+  console.log('onUnmounted');
+});
 </script>
