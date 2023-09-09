@@ -3,12 +3,17 @@
     <h2>{{ userName }}</h2>
     <h2>{{ age }}</h2>
     <h2>{{ user }}</h2>
+    <h2>{{ fullName }}</h2>
     <button @click="setNewData">Change Age</button>
+    <div>
+      <input type="text" pattern="First Name" @input="setFirstName" />
+      <input type="text" pattern="Last Name" @input="setLastName" />
+    </div>
   </section>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 
 // data() {
 //   return {
@@ -26,6 +31,22 @@ const user = reactive({
 function setNewData() {
   user.age = 40;
 }
+
+const firstName = ref('');
+const lastName = ref('');
+
+function setFirstName(e) {
+  firstName.value = e.target.value;
+}
+function setLastName(e) {
+  lastName.value = e.target.value;
+}
+
+const fullName = computed(function () {
+  return firstName.value + ' ' + lastName.value;
+});
+
+fullName.value = 10;
 </script>
 
 <style>
