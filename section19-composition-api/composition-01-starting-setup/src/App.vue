@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
 
 // data() {
 //   return {
@@ -29,7 +29,7 @@ const user = reactive({
   age: 30,
 });
 function setNewData() {
-  user.age = 40;
+  age.value = 40;
 }
 
 const firstName = ref('');
@@ -46,6 +46,17 @@ const fullName = computed(function () {
   return firstName.value + ' ' + lastName.value;
 });
 
+watch(age, function (newValue, oldValue) {
+  console.log('Old age: ' + oldValue);
+  console.log('New age: ' + newValue);
+});
+
+watch([age, userName], function (newValues, oldValues) {
+  console.log('Old age: ' + oldValues[0]);
+  console.log('New age: ' + newValues[0]);
+  console.log('Old userName: ' + oldValues[1]);
+  console.log('New userName: ' + newValues[1]);
+});
 // fullName.value = 10;
 </script>
 
