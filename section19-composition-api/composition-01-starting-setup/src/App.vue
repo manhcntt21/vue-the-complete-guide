@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 
 // data() {
 //   return {
@@ -21,14 +21,16 @@ import { ref } from 'vue';
 const userName = ref('Manh Do');
 const age = ref(27);
 
-const user = ref({
+const user = reactive({
   name: 'Manh Do',
   age: 30,
 });
 setTimeout(() => {
   userName.value = 'Max';
   age.value = 30;
+  user.age = 20;
 }, 2000);
+console.log(user);
 </script>
 
 <style>
