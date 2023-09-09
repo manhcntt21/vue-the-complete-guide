@@ -20,51 +20,43 @@
   </base-container>
 </template>
 
-<script>
+<script setup>
 import ProjectItem from './ProjectItem.vue';
+import { ref, computed, defineProps, watch } from 'vue';
+const enteredSearchTerm = ref('');
+const activeSearchTerm = ref('');
 
-export default {
-  components: {
-    ProjectItem,
-  },
-  props: ['user'],
-  data() {
-    return {
-      enteredSearchTerm: '',
-      activeSearchTerm: '',
-    };
-  },
-  computed: {
-    hasProjects() {
-      return this.user.projects && this.availableProjects.length > 0;
-    },
-    availableProjects() {
-      if (this.activeSearchTerm) {
-        return this.user.projects.filter((prj) =>
-          prj.title.includes(this.activeSearchTerm)
-        );
-      }
-      return this.user.projects;
-    },
-  },
-  methods: {
-    updateSearch(val) {
-      this.enteredSearchTerm = val;
-    },
-  },
-  watch: {
-    enteredSearchTerm(val) {
-      setTimeout(() => {
-        if (val === this.enteredSearchTerm) {
-          this.activeSearchTerm = val;
-        }
-      }, 300);
-    },
-    user() {
-      this.enteredSearchTerm = '';
-    },
-  },
-};
+const props = defineProps({ user: Object });
+
+const hasProjects = computed(function () {
+  return props.user.projects && availableProjects.value.length > 0;
+});
+
+const availableProjects = computed(function () {
+  if (activeSearchTerm.value) {
+    return props.user.projects.filter((prj) =>
+      prj.title.includes(activeSearchTerm.value)
+    );
+  }
+  return props.user.projects;
+});
+
+function updateSearch(val) {
+  enteredSearchTerm.value = val;
+}
+
+watch(enteredSearchTerm, function (val) {
+  setTimeout(() => {
+    if (val === enteredSearchTerm.value) {
+      activeSearchTerm.value = val;
+    }
+  }, 300);
+});
+
+watch(props, function () {
+  console.log(enteredSearchTerm.value);
+  enteredSearchTerm.value = '';
+});
 </script>
 
 <style scoped>
