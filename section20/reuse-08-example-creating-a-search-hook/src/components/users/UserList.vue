@@ -1,17 +1,10 @@
 <template>
   <base-container>
     <h2>Active Users</h2>
-    <base-search
-      @search="updateSearch"
-      :search-term="enteredSearchTerm"
-    ></base-search>
+    <base-search @search="updateSearch" :search-term="enteredSearchTerm"></base-search>
     <div>
-      <button @click="sort('asc')" :class="{ selected: sorting === 'asc' }">
-        Sort Ascending
-      </button>
-      <button @click="sort('desc')" :class="{ selected: sorting === 'desc' }">
-        Sort Descending
-      </button>
+      <button @click="sort('asc')" :class="{selected: sorting === 'asc'}">Sort Ascending</button>
+      <button @click="sort('desc')" :class="{selected: sorting === 'desc'}">Sort Descending</button>
     </div>
     <ul>
       <user-item
@@ -29,7 +22,8 @@
 import { ref, computed, toRefs } from 'vue';
 
 import UserItem from './UserItem.vue';
-import useSearch from '../hooks/search.js';
+import useSearch from '../../hooks/search.js';
+
 export default {
   components: {
     UserItem,
@@ -37,34 +31,8 @@ export default {
   props: ['users'],
   emits: ['list-projects'],
   setup(props) {
-    // const enteredSearchTerm = ref('');
-    // const activeSearchTerm = ref('');
-
-    // const availableUsers = computed(function () {
-    //   let users = [];
-    //   if (activeSearchTerm.value) {
-    //     users = props.users.filter((usr) =>
-    //       usr.fullName.includes(activeSearchTerm.value)
-    //     );
-    //   } else if (props.users) {
-    //     users = props.users;
-    //   }
-    //   return users;
-    // });
-
-    // watch(enteredSearchTerm, function (newValue) {
-    //   setTimeout(() => {
-    //     if (newValue === enteredSearchTerm.value) {
-    //       activeSearchTerm.value = newValue;
-    //     }
-    //   }, 300);
-    // });
-
-    // function updateSearch(val) {
-    //   enteredSearchTerm.value = val;
-    // }
-
     const { users } = toRefs(props);
+
     const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
       users,
       'fullName'
