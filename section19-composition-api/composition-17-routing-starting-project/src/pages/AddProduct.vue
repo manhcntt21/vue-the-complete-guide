@@ -44,7 +44,7 @@ export default {
         price: enteredPrice,
       });
 
-      route.push('/products');
+      route.push({ name: 'products' });
     }
 
     return {

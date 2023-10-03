@@ -10,7 +10,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/products' },
-    { path: '/products', component: AllProducts },
+    { path: '/products', component: AllProducts, name: 'products' },
     { path: '/products/:pid', component: ProductDetails, props: true },
     { path: '/products/add', component: AddProduct },
   ],
