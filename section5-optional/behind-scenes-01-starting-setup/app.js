@@ -96,7 +96,7 @@ const handler = {
         if (key === 'message') {
             target.longMessgae = value + ' World!!!';
         }
-        target.longMessgae = value;
+        target.message = value;
     },
 };
 // wrap this object with proxy in javascript
